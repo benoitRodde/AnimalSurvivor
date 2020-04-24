@@ -1,0 +1,92 @@
+
+<div style="min-height: 84px">
+  <img [lazyLoad]="returnUrlPhoto(animal)">
+  <span style="position: absolute; margin-left: -23px;color:white;">{{ animal.nb }}</span>
+</div>
+ 
+<div>
+  <p><span>Besoin d'eau :</span></p>
+  
+  <div *ngIf="animal.need_water !== null; else no_need_water" style="background-color: #C4A287;width: 100%;height: 20px;">
+    <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': animal.need_water}">
+      <span class="white-color" style="position:absolute;">{{ animal.need_water }} %</span>
+    </div>
+  </div>
+  
+  <ng-template #no_need_water>
+    <i style="font-size:17px" class="fa fa-ambulance"></i>
+  </ng-template>
+
+  <p><span>Besoin de viande : </span></p>
+  
+  <div *ngIf="animal.need_meal !== null;else no_need_meal" style="background-color: #C4A287;width: 100%;height: 20px;text-align: end;">
+    <div style="background-color: #533745;height: 20px;text-align: center;" [ngStyle]="{'width.%': animal.need_meal}">
+      <span class="white-color" style="position:absolute;">{{ animal.need_meal }} %</span>
+    </div>
+  </div>
+  
+  <ng-template #no_need_meal>
+    <i style="font-size:17px" class="fa fa-ambulance"></i>
+  </ng-template>
+  
+  <p><span>Besoin de végétaux : </span></p>
+    
+  <div *ngIf="animal.need_veg !== null;else no_need_veg" style="background-color: #C4A287;width: 100%;height: 20px;">
+    <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': animal.need_veg}">
+      <span class="white-color" style="position:absolute;">{{ animal.need_veg }} %</span>
+    </div>
+  </div>
+  
+  <ng-template #no_need_veg>
+    <i style="font-size:17px" class="fa fa-ambulance"></i>
+  </ng-template>
+
+  <p><span>Résistance aux prédateurs : </span></p>
+    
+  <div *ngIf="animal.res_predator !== null;else no_res_predator" style="background-color: #C4A287;width: 100%;height: 20px;">
+    <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': animal.res_predator}">
+      <span class="white-color" style="position:absolute;">{{ animal.res_predator }} %</span>
+    </div>
+  </div>
+
+  <ng-template #no_res_predator>
+    <i style="font-size:17px" class="fa fa-ambulance"></i>
+  </ng-template>
+
+  <p><span>Résistance à la chaleur : </span></p>
+    
+  <div *ngIf="animal.heat_res !== null;else no_heat_res" style="background-color: #C4A287;width: 100%;height: 20px;">
+    <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': animal.heat_res}">
+      <span class="white-color" style="position:absolute;">{{ animal.heat_res }} %</span>
+    </div>
+  </div>
+  
+  <ng-template #no_heat_res>
+    <i style="font-size:17px" class="fa fa-ambulance"></i>
+  </ng-template>
+
+  <p><span>Résistance au froid : </span></p>
+    
+  <div *ngIf="animal.cold_res !== null;else no_cold_res" style="background-color: #C4A287;width: 100%;height: 20px;">
+    <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': animal.cold_res}">
+      <span class="white-color" style="position:absolute;">{{ animal.cold_res }} %</span>
+    </div>
+  </div>
+
+  <ng-template #no_cold_res>
+    <i style="font-size:17px" class="fa fa-ambulance"></i>
+  </ng-template>
+  
+  <p><span>Agressivité : </span></p>
+    
+  <div *ngIf="animal.agressiveness !== null;else no_agressiveness" style="background-color: #C4A287;width: 100%;height: 20px;">
+    <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': animal.agressiveness}">
+      <span class="white-color" style="position:absolute;">{{ animal.agressiveness }} %</span>
+    </div>
+  </div>
+
+  <ng-template #no_agressiveness>
+    <i style="font-size:17px" class="fa fa-ambulance"></i>
+  </ng-template>
+
+</div>

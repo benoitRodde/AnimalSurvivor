@@ -1,0 +1,30 @@
+<h1>Comparez deux générations</h1>
+<div>
+<label>Animal comparé : </label>
+<select [(ngModel)]="modalAnimalSelected">
+    <option *ngFor="let animal of modalAnimalsTab" [value]="animal">{{ animal }}</option>
+</select>&nbsp;
+<label>Comparé génération numéro :  </label>
+<select [(ngModel)]="modalFirstGeneration">
+    <option *ngFor="let number of modalFirstPartOfGeneration" [value]="number">{{ number + 1 }}</option>
+</select>&nbsp;
+<label>Avec génération numéro : </label>
+<select [(ngModel)]="modalSecondGeneration">
+    <option *ngFor="let number of modalSecondPartOfGeneration" [value]="number">{{ number + 1 }}</option>
+</select>
+</div>
+<br>
+<div style="display: flex;width: 100%;justify-content: space-around;">
+    <div>
+        <h4>Géneration numéro : {{ addOneToNumber(modalFirstGeneration) }}</h4><br>
+        <app-show-gene [animal]="responseServePyhton[modalFirstGeneration][convertAnimalToNumber(modalAnimalSelected)]"></app-show-gene>
+    </div>
+    <div>
+        <h4>Géneration numéro : {{ addOneToNumber(modalSecondGeneration) }}</h4><br>
+        <app-show-gene [animal]="responseServePyhton[modalSecondGeneration][convertAnimalToNumber(modalAnimalSelected)]"></app-show-gene>
+    </div>
+    <div>
+        <h4>Evolution entre les deux générations</h4><br>
+        <app-show-genes [animal1]="responseServePyhton[modalFirstGeneration][convertAnimalToNumber(modalAnimalSelected)]" [animal2]="responseServePyhton[modalSecondGeneration][convertAnimalToNumber(modalAnimalSelected)]"></app-show-genes>
+    </div>
+</div>

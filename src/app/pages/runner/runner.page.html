@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div style="display: flex;width:100%;color:#533745" class="align-center" [ngClass]="{'grey-filter': isShowModal}">
+  <div class="left-col">
+    <h2>Type d'environnment</h2>
+    
+    <label>Choose your environment : </label>
+    <select [(ngModel)]="ecosysteme" (change)="changeUrlImg()">
+      <option value="Desert">Désert</option>
+      <option value="Ville">Ville</option>
+      <option value="Foret">Forêt</option>
+    </select><br>
+    <div class="align-center full-width">
+      <img class="big-img" [lazyLoad]="urlImg">
+    </div><br>
+    <h2>Caractéristique de l'environnment</h2>
+    <h4>(Vous ne pouvez modifier que de 10 points au dessus ou 10 points en dessous chaque caractéristique d'un environnment)</h4>
+    <div style="display:flex;text-align: -webkit-right;text-align: right;justify-content: space-around;">
+      <div>
+        <label>Faune : </label>
+        <input type="number" [min]="getMin('wildlife')" [max]="getMax('wildlife')" [(ngModel)]="wildlife"> <br>
+        <label>Flore : </label>
+        <input type="number" [min]="getMin('flora')" [max]="getMax('flora')" [(ngModel)]="flora"><br>
+      </div>
+      <div>
+        <label>Temperature (en °): </label>
+        <input type="number" [min]="getMin('temperature')" [max]="getMax('temperature')" [(ngModel)]="temperature"><br>
+        <label>Eau : </label>
+        <input type="number" [min]="getMin('water')" [max]="getMax('water')" [(ngModel)]="water"><br>
+      </div>
+    </div>
+    <br>
+    <h2>Nombre d'animaux présent dans la population</h2>
+    <div style="display:flex;justify-content: center;text-align: right;">
+      <!-- Dog number -->
+      <div style="display:flex;width: 50%;justify-content: center;">
+        <div id="img-dog">
+          <span class="span-in-img">
+            {{ dogNumber }}
+          </span>
+        </div>
+        <div style="margin-left: -4px;margin-right: 9px;height:70px;">
+          <button class="background-ynov animate-button" (click)="addDogNumber()">+</button>
+          <button class="background-ynov animate-button" (click)="removeDogNumber()">-</button>
+        </div>
+      </div>
+      <!-- Singe number -->
+      <div style="display:flex;width: 50%;justify-content: center;">
+        <div id="img-singe">
+          <span class="span-in-img">
+            {{ singeNumber }}
+          </span>
+        </div>
+        <div style="margin-left: -4px;margin-right: 9px;height:70px;">
+          <button class="background-ynov animate-button" (click)="addSingeNumber()">+</button>
+          <button class="background-ynov animate-button" (click)="removeSingeNumber()">-</button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content: center;text-align: right;margin-top: 10px;">
+      <!-- Rat number -->
+      <div style="display:flex;width: 50%;justify-content: center;">
+        <div id="img-rat">
+          <span style="color:black;" class="span-in-img">
+            {{ ratNumber }}
+          </span>
+        </div>
+        <div style="margin-left: -4px;margin-right: 9px;height:70px;">
+          <button class="background-ynov animate-button" (click)="addRatNumber()">+</button>
+          <button class="background-ynov animate-button" (click)="removeRatNumber()">-</button>
+        </div>
+      </div>
+
+      <!-- Snake number -->
+      <div style="display:flex;width: 50%;justify-content: center;">
+        <div id="img-serpent">
+          <span class="span-in-img">
+            {{ snakeNumber }}
+          </span>
+        </div>
+        <div style="margin-left: -4px;margin-right: 9px;height:70px;height: 70px;">
+          <button class="background-ynov animate-button" (click)="addSnakeNumber()">+</button>
+          <button class="background-ynov animate-button" (click)="removeSnakeNumber()">-</button>
+        </div>
+      </div>
+      
+    </div>
+    <div class="align-center full-width" style="margin-top: 25px;">
+      <button class="button" (click)="runOnServe()"><span>Lancer la simulation</span></button>
+    </div>
+  </div>
+  
+  <div class="right-col">
+    <h1>Evolution au fil des générations</h1>
+    <div *ngIf="isShowLoader"
+      style="width:100%;height:80%;display:flex;justify-content: center;align-items: center;">
+      <div class="loader"></div>
+    </div>
+
+    <div *ngIf="!isShowLoader && responseServePyhton.length === 0" style="text-align: center; height: 90%;display: flex;justify-content: center;align-items: center;">
+      <h2 style="align-items: center;"> Veuillez choisir vos paramètres d'envrionements puis lancer la simulation</h2>
+    </div>
+
+    <div *ngIf="!isShowLoader && responseServePyhton.length > 0">
+      <h2>Génération numéro {{ numGenerationDisplay+1 }} </h2>
+      <tr style="display: flex;justify-content: center;">
+        <td *ngFor="let pop of responseServePyhton[numGenerationDisplay];">
+          <app-show-gene [animal]="pop" [ecosysteme]="ecosysteme"></app-show-gene>
+        </td>
+      </tr>
+      <br>
+      <br>
+     <!-- <div id="myProgress">
+        <div id="myBar"></div>
+      </div> -->
+      <div style="width: 100%;display:flex;">
+        <div style="display: flex;width:50%;justify-content: center;margin-left: 26%;">
+          <button class="background-ynov animate-button" (click)="onClickPreviousGen()" type="button"><i class="fa fa-step-backward" style="font-size:24px;width: 33%"></i></button>
+          <button class="background-ynov animate-button" (click)="onClickPlayGen()" type="button" *ngIf="!isPlaying"><i class="fa fa-play-circle-o" style="font-size:24px;width: 33%"></i></button>
+          <button class="background-ynov animate-button" (click)="onClickPauseGen()" type="button" *ngIf="isPlaying"><i class="fa fa-pause-circle-o" style="font-size:24px;width: 33%"></i></button>
+          <button class="background-ynov animate-button" (click)="onClickNextGen()" type="button"><i class="fa fa-step-forward" style="font-size:24px;width: 33%"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<button [ngClass]="{'grey-filter': isShowModal}" *ngIf="!isShowLoader && responseServePyhton.length > 0" class="button animate-button" (click)="openModal()"style="position: absolute;top:10px;right:10px;width:150px; font-size: 18px;height:70px">Comparer deux générations</button>
+
+<!-- Modal content -->
+<div class="modal-content" *ngIf="isShowModal">
+  <span (click)="closeModal()" class="close">&times;</span>
+  <app-show-modal [responseServePyhton]="responseServePyhton"></app-show-modal>
+</div>

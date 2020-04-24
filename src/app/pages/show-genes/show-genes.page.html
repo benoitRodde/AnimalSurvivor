@@ -1,0 +1,162 @@
+<div style="min-height: 84px">
+  <img [lazyLoad]="returnUrlPhoto(animal2.race, this.animal2.nb - this.animal1.nb)">
+  <span style="position: absolute; margin-left: -23px;color:white;"><span *ngIf="animal2.nb - animal1.nb >= 0">+</span>{{ animal2.nb - animal1.nb }}</span>
+</div>
+
+<div>
+  <p><span>Evolution du besoin en eau :</span></p>
+  
+  <div style="background-color: #C4A287;width: 100%;height: 20px;">
+
+    <div style="display:flex;" *ngIf="animal2.need_water - animal1.need_water > 0">
+      <!-- Si progression -->
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal1.need_water}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.need_water - animal1.need_water > 0">+</span>{{ fixed(animal2.need_water - animal1.need_water)  }}%</span>
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal2.need_water - animal1.need_water)}">
+      </div>
+    </div>
+    <!-- Si reduction -->
+    <div style="display:flex;" *ngIf="animal1.need_water - animal2.need_water > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal2.need_water}">
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal1.need_water - animal2.need_water)}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.need_water - animal1.need_water > 0">+</span>{{ fixed(animal2.need_water - animal1.need_water)  }}%</span>
+      </div>
+    </div>
+  </div>
+
+
+  <p><span>Evolution du besoin en viande : </span></p>
+
+  <div style="background-color: #C4A287;width: 100%;height: 20px;">
+
+    <div style="display:flex;" *ngIf="animal2.need_meal - animal1.need_meal > 0">
+    <!-- Si progression -->
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal1.need_meal}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.need_meal - animal1.need_meal > 0">+</span>{{ fixed(animal2.need_meal - animal1.need_meal)  }}%</span>
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal2.need_meal - animal1.need_meal)}">
+      </div>
+    </div>
+    <!-- Si reduction -->
+    <div style="display:flex;" *ngIf="animal1.need_meal - animal2.need_meal > 0">
+     
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal2.need_meal}">
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal1.need_meal - animal2.need_meal)}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.need_meal - animal1.need_meal > 0">+</span>{{ fixed(animal2.need_meal - animal1.need_meal)  }}%</span>
+      </div>
+    </div>
+  </div>
+
+  
+  <p><span>Evolution du besoin en végétaux : </span></p>
+    
+  <div style="background-color: #C4A287;width: 100%;height: 20px;">
+     <!-- Si progression -->
+    <div style="display:flex;" *ngIf="animal2.need_veg - animal1.need_veg > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal1.need_veg}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.need_veg - animal1.need_veg > 0">+</span>{{ fixed(animal2.need_veg - animal1.need_veg)  }}%</span>
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal2.need_veg - animal1.need_veg)}">
+      </div>
+    </div>
+     <!-- Si reduction -->
+    <div style="display:flex;" *ngIf="animal1.need_veg - animal2.need_veg > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal2.need_veg}">
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal1.need_veg - animal2.need_veg)}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.need_veg - animal1.need_veg > 0">+</span>{{ fixed(animal2.need_veg - animal1.need_veg)  }}%</span>
+      </div>
+    </div>
+  </div>
+
+
+  <p><span>Evolution de la résistance aux prédateurs : </span></p>
+  <div style="background-color: #C4A287;width: 100%;height: 20px;">
+   
+    <!-- Si progression -->
+    <div style="display:flex;" *ngIf="animal2.res_predator - animal1.res_predator > 0">
+      <span class="white-color" style="position:absolute;"><span *ngIf="animal2.res_predator - animal1.res_predator > 0">+</span>{{ fixed(animal2.res_predator - animal1.res_predator)  }}%</span>
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal1.res_predator}">
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal2.res_predator - animal1.res_predator)}">
+      </div>
+    </div>
+    <!-- Si reduction -->
+    <div style="display:flex;" *ngIf="animal1.res_predator - animal2.res_predator > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal2.res_predator}">
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal1.res_predator - animal2.res_predator)}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.res_predator - animal1.res_predator > 0">+</span>{{ fixed(animal2.res_predator - animal1.res_predator)  }}%</span>
+      </div>
+    </div>
+  </div>
+
+  <p><span>Evolution de la résistance à la chaleur : </span></p>
+  <div style="background-color: #C4A287;width: 100%;height: 20px;">
+    <!-- Si progression -->
+    <div style="display:flex;" *ngIf="animal2.heat_res - animal1.heat_res > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal1.heat_res}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.heat_res - animal1.heat_res > 0">+</span>{{ fixed(animal2.heat_res - animal1.heat_res)  }}%</span>
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal2.heat_res - animal1.heat_res)}">
+      </div>
+    </div>
+    <!-- Si reduction -->
+    <div style="display:flex;" *ngIf="animal1.heat_res - animal2.heat_res > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal2.heat_res}">
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal1.heat_res - animal2.heat_res)}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.heat_res - animal1.heat_res > 0">+</span>{{ fixed(animal2.heat_res - animal1.heat_res)  }}%</span>
+      </div>
+    </div>
+  </div>
+
+
+  <p><span>Evolution de la résistance au froid : </span></p>
+    
+
+  <div style="background-color: #C4A287;width: 100%;height: 20px;">
+     <!-- Si progression -->
+    <div style="display:flex;" *ngIf="animal2.cold_res - animal1.cold_res > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal1.cold_res}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.cold_res - animal1.cold_res > 0">+</span>{{ fixed(animal2.cold_res - animal1.cold_res)  }}%</span>
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal2.cold_res - animal1.cold_res)}">
+      </div>
+    </div>
+    <!-- Si reduction -->
+    <div style="display:flex;" *ngIf="animal1.cold_res - animal2.cold_res > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal2.cold_res}">
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal1.cold_res - animal2.cold_res)}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.cold_res - animal1.cold_res > 0">+</span>{{ fixed(animal2.cold_res - animal1.cold_res)  }}%</span>
+      </div>
+    </div>
+  </div>
+  
+  <p><span>Evolution de l'agressivité : </span></p>
+    
+ 
+  <div style="background-color: #C4A287;width: 100%;height: 20px;">
+    <!-- Si progression -->
+    <div style="display:flex;" *ngIf="animal2.agressiveness - animal1.agressiveness > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal1.agressiveness}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.agressiveness - animal1.agressiveness > 0">+</span>{{ fixed(animal2.agressiveness - animal1.agressiveness)  }}%</span>
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal2.agressiveness - animal1.agressiveness)}">
+      </div>
+    </div>
+    <!-- Si reduction -->
+    <div style="display:flex;" *ngIf="animal1.agressiveness - animal2.agressiveness > 0">
+      <div style="background-color: #8f5f77;height: 20px;" [ngStyle]="{'width.%': animal2.agressiveness}">
+      </div>
+      <div style="background-color: #533745;height: 20px;" [ngStyle]="{'width.%': (animal1.agressiveness - animal2.agressiveness)}">
+        <span class="white-color" style="position:absolute;"><span *ngIf="animal2.agressiveness - animal1.agressiveness > 0">+</span>{{ fixed(animal2.agressiveness - animal1.agressiveness)  }}%</span>
+      </div>
+    </div>
+  </div>
+
+</div>
